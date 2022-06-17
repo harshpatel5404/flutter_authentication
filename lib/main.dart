@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_authentication/ui/layout1/constants/colors.dart';
+import 'package:flutter_authentication/ui/layout1/screens/login_screen1.dart';
+import 'package:flutter_authentication/ui/layout1/screens/signup_screen1.dart';
 
 void main() {
   runApp(const MyApp());
@@ -6,16 +9,14 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-       theme: ThemeData(
-        fontFamily: 'Poppins',
-      ),
-      // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Authentication',
+        theme: ThemeData(
+          fontFamily: 'Poppins',
+        ),
+        home: const SignupScreen1());
   }
 }
