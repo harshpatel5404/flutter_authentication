@@ -198,9 +198,12 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           onPressed: () {},
                           elevation: 2.0,
                           fillColor: Colors.white,
-                          child: Image.asset(
-                            "assets/icons/google.png",
-                            height: size.height * 0.07,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              "assets/icons/google1.png",
+                              height: size.height * 0.05,
+                            ),
                           ),
                           shape: CircleBorder(),
                         ),
@@ -209,7 +212,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           elevation: 2.0,
                           fillColor: Colors.white,
                           child: Image.asset(
-                            "assets/icons/facebook.png",
+                            "assets/icons/facebook1.png",
                             height: size.height * 0.07,
                           ),
                           shape: CircleBorder(),
@@ -218,10 +221,13 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           onPressed: () {},
                           elevation: 2.0,
                           fillColor: Colors.black,
-                          child: Image.asset(
-                            "assets/icons/apple.png",
-                            color: Colors.white,
-                            height: size.height * 0.07,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Image.asset(
+                              "assets/icons/apple1.png",
+                              color: Colors.white,
+                              height: size.height * 0.05,
+                            ),
                           ),
                           shape: CircleBorder(),
                         ),
