@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hddeveloper.flutterauthentication">
    <application
-        android:label="flutter_authentication"
+        android:label="flutterauthentication"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

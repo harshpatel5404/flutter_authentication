@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout1/widgets/input_filed.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -195,7 +196,9 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           width: 1,
                         ),
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            // AuthServices.signInWithGoogle().then((value) => print(value));
+                          },
                           elevation: 2.0,
                           fillColor: Colors.white,
                           child: Padding(
