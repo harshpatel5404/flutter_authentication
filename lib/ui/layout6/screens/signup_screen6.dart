@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication/ui/layout6/constants/colors.dart';
-import 'package:flutter_authentication/ui/layout6/screens/login_screen6.dart';
-import 'package:flutter_authentication/ui/layout6/widgets/input_field.dart';
+import 'package:flutterauthentication/ui/layout6/constants/colors.dart';
+import 'package:flutterauthentication/ui/layout6/screens/login_screen6.dart';
+import 'package:flutterauthentication/ui/layout6/widgets/input_field.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 

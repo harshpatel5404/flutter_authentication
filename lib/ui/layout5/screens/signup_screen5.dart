@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication/ui/layout5/constants/colors.dart';
-import 'package:flutter_authentication/ui/layout5/screens/login_screen5.dart';
-import 'package:flutter_authentication/ui/layout5/widgets/input_field.dart';
+import 'package:flutterauthentication/ui/layout5/constants/colors.dart';
+import 'package:flutterauthentication/ui/layout5/screens/login_screen5.dart';
+import 'package:flutterauthentication/ui/layout5/widgets/input_field.dart';
 
 class SignupScreen5 extends StatefulWidget {
   const SignupScreen5({Key? key}) : super(key: key);

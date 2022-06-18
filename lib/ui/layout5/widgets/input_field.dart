@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication/ui/layout5/constants/colors.dart';
+import 'package:flutterauthentication/ui/layout5/constants/colors.dart';
 
 class Inputfield extends StatelessWidget {
   TextEditingController? controller;

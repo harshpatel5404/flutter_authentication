@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication/ui/layout6/constants/colors.dart';
-import 'package:flutter_authentication/ui/layout6/screens/signup_screen6.dart';
-import 'package:flutter_authentication/ui/layout6/widgets/input_field.dart';
+import 'package:flutterauthentication/ui/layout6/constants/colors.dart';
+import 'package:flutterauthentication/ui/layout6/screens/signup_screen6.dart';
+import 'package:flutterauthentication/ui/layout6/widgets/input_field.dart';
 import 'package:flutter_signin_button/button_list.dart';
 import 'package:flutter_signin_button/button_view.dart';
 
@@ -59,7 +59,6 @@ class _SigninScreen6State extends State<SigninScreen6> {
                         fontSize: 20,
                         fontWeight: FontWeight.bold),
                   ),
-
                   SizedBox(
                     height: size.height * 0.03,
                   ),
@@ -111,7 +110,6 @@ class _SigninScreen6State extends State<SigninScreen6> {
                   SizedBox(
                     height: size.height * 0.03,
                   ),
-                 
                   SizedBox(
                     width: size.width * 0.85,
                     height: size.height * 0.07,
@@ -138,7 +136,6 @@ class _SigninScreen6State extends State<SigninScreen6> {
                       ),
                     ),
                   ),
-
                   const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: Align(
@@ -152,7 +149,6 @@ class _SigninScreen6State extends State<SigninScreen6> {
                       ),
                     ),
                   ),
-
                   Container(
                     width: size.width * 0.8,
                     height: size.width * 0.14,

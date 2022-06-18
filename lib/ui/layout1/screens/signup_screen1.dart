@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication/ui/layout1/constants/colors.dart';
-import 'package:flutter_authentication/ui/layout1/screens/login_screen1.dart';
-import 'package:flutter_authentication/ui/layout1/widgets/input_filed.dart';
+import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
+import 'package:flutterauthentication/ui/layout1/screens/login_screen1.dart';
+import 'package:flutterauthentication/ui/layout1/widgets/input_filed.dart';
 
 class SignupScreen1 extends StatefulWidget {
   const SignupScreen1({Key? key}) : super(key: key);
@@ -54,7 +54,7 @@ class _SignupScreen1State extends State<SignupScreen1> {
                       width: size.width * 0.6,
                       child: Image.asset("assets/layout1/signup.png"),
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Sign Up",

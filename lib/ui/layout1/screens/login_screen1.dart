@@ -1,8 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_authentication/ui/layout1/constants/colors.dart';
-import 'package:flutter_authentication/ui/layout1/widgets/input_filed.dart';
+import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
+import 'package:flutterauthentication/ui/layout1/widgets/input_filed.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'signup_screen1.dart';
