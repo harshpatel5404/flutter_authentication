@@ -1,9 +1,11 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout1/widgets/input_filed.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'signup_screen1.dart';
@@ -20,7 +22,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
   bool isVisible = false;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passcontroller = TextEditingController();
-
+ 
   @override
   void initState() {
     super.initState();
@@ -197,7 +199,9 @@ class _LoginScreen1State extends State<LoginScreen1> {
                         ),
                         RawMaterialButton(
                           onPressed: () {
-                            // AuthServices.signInWithGoogle().then((value) => print(value));
+                            print("press");
+                            AuthenticationService.signInWithGoogle()
+                                .then((value) => print(value));
                           },
                           elevation: 2.0,
                           fillColor: Colors.white,
@@ -211,7 +215,9 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           shape: CircleBorder(),
                         ),
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            
+                          },
                           elevation: 2.0,
                           fillColor: Colors.white,
                           child: Image.asset(
@@ -238,7 +244,6 @@ class _LoginScreen1State extends State<LoginScreen1> {
                         SizedBox(
                           width: 1,
                         )
-                        // Image.asset("assets/layout1/google.png"),
                       ],
                     ),
                     SizedBox(height: size.height * 0.02),

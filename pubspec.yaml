@@ -37,8 +37,10 @@ dependencies:
   email_validator: ^2.0.1
   material_design_icons_flutter: ^5.0.6595
   flutter_signin_button: ^2.0.0
-  firebase_auth: ^3.3.6
-  firebase_core: "^1.7.0"
+  firebase_auth: ^3.3.8
+  firebase_core:   
+  flutter_facebook_auth: ^4.3.4+2
+
   google_sign_in: ^5.0.3
 
 dev_dependencies:

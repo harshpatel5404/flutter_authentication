@@ -20,6 +20,7 @@ class Inputfield extends StatelessWidget {
       this.suffixicon})
       : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
