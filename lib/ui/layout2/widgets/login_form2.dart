@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout2/Widgets/button2.dart';
 import 'package:flutterauthentication/ui/layout2/constants/colors.dart';
 
@@ -46,6 +47,9 @@ class _LoginFormState extends State<LoginForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
+                AuthenticationService.signInWithEmail(
+                        emailcontroller.text, passcontroller.text)
+                    .then((value) => print(value));
               }
             },
           ),
@@ -74,7 +78,7 @@ class _LoginFormState extends State<LoginForm> {
             borderSide: const BorderSide(width: 5.0),
           ),
           hintText: "Enter your password",
-          hintStyle: TextStyle(color: Colors.grey.withOpacity(0.7)),
+          hintStyle: TextStyle(color: Colors.grey),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(width: 2.0),

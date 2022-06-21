@@ -1,8 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout2/Widgets/button2.dart';
 import 'package:flutterauthentication/ui/layout2/constants/colors.dart';
+
+import '../screens/login_screen2.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -56,18 +59,11 @@ class _SignUpFormState extends State<SignUpForm> {
             press: () {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // createUserwithEmail(namecontroller.text, emailcontroller.text,
-                //         phonecontroller.text, passcontroller.text)
-                //     .then((value) {
-                //   if (value == "Email already exists") {
-                // scafoldmessage(context, value);
-                //   } else {
-                // scafoldmessage(context, "Sign Up Successfully..!");
-
-                //   }
-                //   print(value);
-                // });
-                // if all are valid then go to success screen
+                AuthenticationService.createUserwithEmail(
+                        emailcontroller.text, passcontroller.text)
+                    .then((value) => print(value));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => LoginScreen2()));
               }
             },
           ),
@@ -116,9 +112,9 @@ class _SignUpFormState extends State<SignUpForm> {
       onSaved: (newValue) => conform_password = newValue,
       validator: (value) {
         if (value!.isEmpty) {
-          return "Please Enter Confirm Email";
-        } else if ((password != value)) {
-          return "";
+          return "Please Enter Confirm Password";
+        } else if ((passcontroller.text != value)) {
+          return "Password Does not Match";
         }
         return null;
       },
@@ -166,8 +162,8 @@ class _SignUpFormState extends State<SignUpForm> {
       validator: (value) {
         if (value!.isEmpty) {
           return "Please Enter your password";
-        } else if (value.length < 8) {
-          return "";
+        } else if (value.length < 6) {
+          return "Password is too short!";
         }
         return null;
       },
@@ -178,7 +174,7 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           hintText: "Enter your password",
           contentPadding: EdgeInsets.all(16),
-          hintStyle: TextStyle(color: Colors.grey.withOpacity(0.7)),
+          hintStyle: TextStyle(color: Colors.grey),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30),
             borderSide: const BorderSide(width: 2.0),

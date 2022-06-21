@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout6/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout6/screens/login_screen6.dart';
 import 'package:flutterauthentication/ui/layout6/widgets/input_field.dart';
@@ -140,6 +141,16 @@ class _SignupScreen6State extends State<SignupScreen6> {
                           print(emailcontroller.text);
                           print(namecontroller.text);
                           print(passcontroller.text);
+
+                          AuthenticationService.createUserwithEmail(
+                                  emailcontroller.text, passcontroller.text)
+                              .then((value) {
+                            print(value);
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => SigninScreen6()));
+                          });
                         }
                       },
                       child: Text(
@@ -174,7 +185,10 @@ class _SignupScreen6State extends State<SignupScreen6> {
                       text: "Sign up with Google",
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthenticationService.signInWithGoogle()
+                            .then((value) => print(value));
+                      },
                     ),
                   ),
                   SizedBox(
@@ -188,7 +202,10 @@ class _SignupScreen6State extends State<SignupScreen6> {
                       text: "Sign up facebook",
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthenticationService.signInWithFacebook()
+                            .then((value) => print(value));
+                      },
                     ),
                   ),
                   Padding(

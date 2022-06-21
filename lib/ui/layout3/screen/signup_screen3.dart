@@ -7,6 +7,8 @@ import 'package:flutterauthentication/ui/layout3/screen/login_screen3.dart';
 import 'package:flutterauthentication/ui/layout3/widgets/button3.dart';
 import 'package:flutterauthentication/ui/layout3/widgets/textformfield3.dart';
 
+import '../../../auth/auth_services.dart';
+
 class SignupScreen3 extends StatefulWidget {
   const SignupScreen3({Key? key}) : super(key: key);
 
@@ -14,6 +16,7 @@ class SignupScreen3 extends StatefulWidget {
   State<SignupScreen3> createState() => _SignupScreen3State();
 }
 
+TextEditingController namecontroller = TextEditingController();
 TextEditingController emailcontroller = TextEditingController();
 TextEditingController passcontroller = TextEditingController();
 TextEditingController confpasscontroller = TextEditingController();
@@ -52,8 +55,8 @@ class _SignupScreen3State extends State<SignupScreen3> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         TextFormfield3(
-                          obsecure: true,
-                          emailcontroller: emailcontroller,
+                          obsecure: false,
+                          emailcontroller: namecontroller,
                           hintText: "ENTER NAME",
                           icon: Icon(
                             Icons.person,
@@ -77,7 +80,7 @@ class _SignupScreen3State extends State<SignupScreen3> {
                             if (val!.isEmpty) {
                               return "PLEASE ENTER EMAIL";
                             } else if (!isEmail(emailcontroller.text)) {
-                              return "'ENTER VALID EMAIL ADDRESS";
+                              return "ENTER VALID EMAIL ADDRESS";
                             }
                           },
                         ),
@@ -112,15 +115,24 @@ class _SignupScreen3State extends State<SignupScreen3> {
                               return "MINIMUM REQUIRED LENGTH IS 8";
                             } else if (confpasscontroller.text !=
                                 passcontroller.text) {
-                              return "PASSWORD AND CONFIRM-PASSWORD NOT MATCH";
+                              return "CONFIRM PASSWORD NOT MATCH";
                             }
                           },
                         ),
                         DefaultButton3(
-                          text: "LOGIN",
+                          text: "SIGNUP",
                           press: () {
                             if (_formKey.currentState!.validate()) {
                               _formKey.currentState!.save();
+                              AuthenticationService.createUserwithEmail(
+                                      emailcontroller.text, passcontroller.text)
+                                  .then((value) {
+                                print(value);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) => LoginScreen3()));
+                              });
                             }
                           },
                         ),
@@ -162,41 +174,52 @@ class _SignupScreen3State extends State<SignupScreen3> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              children: [
-                Image.asset(
-                  "assets/layout3/google.png",
-                  height: height * 0.04,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Google",
-                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
-                )
-              ],
+            InkWell(
+              onTap: () {
+                AuthenticationService.signInWithGoogle()
+                    .then((value) => print(value));
+              },
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/icons/google1.png",
+                    height: height * 0.04,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Google",
+                    style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                  )
+                ],
+              ),
             ),
             VerticalDivider(
               color: Colors.white38,
               indent: 10,
               endIndent: 10,
             ),
-            Row(
-              children: [
-                Image.asset(
-                  "assets/layout3/apple.png",
-                  height: height * 0.05,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: 8,
-                ),
-                Text(
-                  "Apple",
-                  style: TextStyle(color: Colors.white.withOpacity(0.8)),
-                )
-              ],
+            InkWell(
+              onTap: () {
+                AuthenticationService.signInWithFacebook()
+                    .then((value) => print(value));
+              },
+              child: Row(
+                children: [
+                  Image.asset(
+                    "assets/icons/facebook1.png",
+                    height: height * 0.05,
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Facebook",
+                    style: TextStyle(color: Colors.white.withOpacity(0.8)),
+                  )
+                ],
+              ),
             )
           ],
         ),

@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
@@ -11,7 +12,44 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 class AuthenticationService {
   static final FirebaseAuth _auth = FirebaseAuth.instance;
   static final GoogleSignIn googleSignIn = GoogleSignIn();
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+  final Future<FirebaseApp> initialization = Firebase.initializeApp();
+
+  static Future<String> createUserwithEmail(email, pass) async {
+    String val = "";
+    try {
+      UserCredential authResult = await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: pass);
+      User? user = authResult.user;
+      return user.toString();
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'email-already-in-use') {
+        val = 'Email already exists';
+        return val;
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+    }
+    return val;
+  }
+
+  static Future signInWithEmail(email, password) async {
+    try {
+      UserCredential userCredential = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: email, password: password);
+      var user = userCredential.user;
+      if (user != null) {
+        return user;
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return "No user found for that email.";
+      } else if (e.code == 'wrong-password') {
+        return 'Wrong password provided for that user.';
+      }
+    }
+  }
 
   static Future<User?> signInWithGoogle() async {
     try {
@@ -36,7 +74,6 @@ class AuthenticationService {
     }
     return null;
   }
- 
 
   static Future<String> signInWithFacebook() async {
     try {
@@ -62,7 +99,7 @@ class AuthenticationService {
     }
   }
 
- static  Future<UserCredential> signInWithApple() async {
+  static Future<UserCredential> signInWithApple() async {
     String generateNonce([int length = 32]) {
       const charset =
           '0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._';

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout2/Widgets/signup_form2.dart';
 import 'package:flutterauthentication/ui/layout2/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout2/screens/login_screen2.dart';
@@ -64,17 +65,35 @@ class SignupScreen2State extends State<SignupScreen2> {
                     const SizedBox(
                       width: 1,
                     ),
-                    Image.asset(
-                      "assets/layout1/facebook.png",
-                      height: height * 0.06,
+                    InkWell(
+                      onTap: () {
+                        AuthenticationService.signInWithGoogle()
+                            .then((value) => print(value));
+                      },
+                      child: Image.asset(
+                        "assets/icons/google1.png",
+                        height: height * 0.055,
+                      ),
                     ),
-                    Image.asset(
-                      "assets/layout1/google.png",
-                      height: height * 0.055,
+                    InkWell(
+                      onTap: () {
+                        AuthenticationService.signInWithFacebook()
+                            .then((value) => print(value));
+                      },
+                      child: Image.asset(
+                        "assets/icons/facebook1.png",
+                        height: height * 0.055,
+                      ),
                     ),
-                    Image.asset(
-                      "assets/layout1/apple.png",
-                      height: height * 0.06,
+                    InkWell(
+                      onTap: () {
+                        AuthenticationService.signInWithApple()
+                            .then((value) => print(value));
+                      },
+                      child: Image.asset(
+                        "assets/icons/apple1.png",
+                        height: height * 0.055,
+                      ),
                     ),
                     const SizedBox(
                       width: 1,
@@ -82,6 +101,7 @@ class SignupScreen2State extends State<SignupScreen2> {
                     // Image.asset("assets/layout1/google.png"),
                   ],
                 ),
+              
                 SizedBox(height: 20),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

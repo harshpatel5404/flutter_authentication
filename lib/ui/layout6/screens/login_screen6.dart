@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout6/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout6/screens/signup_screen6.dart';
 import 'package:flutterauthentication/ui/layout6/widgets/input_field.dart';
@@ -125,6 +126,13 @@ class _SigninScreen6State extends State<SigninScreen6> {
                           _formKey.currentState!.save();
                           print(emailcontroller.text);
                           print(passcontroller.text);
+                             AuthenticationService.signInWithEmail(
+                                  emailcontroller.text, passcontroller.text)
+                              .then((value) {
+                            print(value);
+                            
+                          });
+
                         }
                       },
                       child: Text(
@@ -159,7 +167,10 @@ class _SigninScreen6State extends State<SigninScreen6> {
                       text: "Sign up with Google",
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {},
+                      onPressed: () {
+                         AuthenticationService.signInWithGoogle()
+                                .then((value) => print(value));
+                      },
                     ),
                   ),
                   SizedBox(
@@ -173,7 +184,10 @@ class _SigninScreen6State extends State<SigninScreen6> {
                       text: "Sign up facebook",
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {},
+                      onPressed: () {
+                        AuthenticationService.signInWithFacebook()
+                            .then((value) => print(value));
+                      },
                     ),
                   ),
                   SizedBox(

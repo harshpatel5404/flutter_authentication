@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout1/screens/login_screen1.dart';
 import 'package:flutterauthentication/ui/layout1/screens/signup_screen1.dart';
+import 'package:flutterauthentication/ui/layout3/screen/signup_screen3.dart';
+import 'package:flutterauthentication/ui/layout4/screens/signup_screen4.dart';
 import 'package:flutterauthentication/ui/layout6/screens/signup_screen6.dart';
+import 'ui/layout2/screens/signup_screen2.dart';
 import 'ui/layout5/screens/signup_screen5.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -24,6 +25,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: 'Poppins',
         ),
-        home: const LoginScreen1());
+        home: const SignupScreen6());
   }
 }

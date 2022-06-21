@@ -132,6 +132,8 @@ class _LoginScreen1State extends State<LoginScreen1> {
                             _formKey.currentState!.save();
                             print(emailcontroller.text);
                             print(passcontroller.text);
+                             AuthenticationService.signInWithEmail(emailcontroller.text,passcontroller.text)
+                            .then((value) => print(value));
                           }
                         },
                         child: const Text(

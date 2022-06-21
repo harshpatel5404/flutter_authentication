@@ -6,6 +6,8 @@ import 'package:flutterauthentication/ui/layout4/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout4/widgets/button4.dart';
 import 'package:flutterauthentication/ui/layout4/widgets/textformfield4.dart';
 
+import '../../../auth/auth_services.dart';
+
 class SignupScreen4 extends StatefulWidget {
   const SignupScreen4({Key? key}) : super(key: key);
 
@@ -34,7 +36,7 @@ class _SignupScreen4State extends State<SignupScreen4>
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays([]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -42,12 +44,17 @@ class _SignupScreen4State extends State<SignupScreen4>
       body: SizedBox(
         height: height,
         child: Stack(
-          // overflow: Overflow.visible,
           children: [
             Container(
+                height: height * 0.4,
                 width: width,
                 child: Positioned(
-                    top: 0, child: Image.asset("assets/layout4/back.jpg"))),
+                  top: 0,
+                  child: Image.asset(
+                    "assets/layout4/back.jpg",
+                    fit: BoxFit.fitHeight,
+                  ),
+                )),
             Positioned(
               top: height * 0.28,
               left: 0,
@@ -68,7 +75,7 @@ class _SignupScreen4State extends State<SignupScreen4>
                   child: DefaultTabController(
                     length: 2,
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
                         children: [
                           Container(
@@ -97,7 +104,7 @@ class _SignupScreen4State extends State<SignupScreen4>
                               ],
                             ),
                           ),
-                          Container(
+                          SizedBox(
                             height: height * 0.4,
                             child: TabBarView(
                                 controller: _tabController,
@@ -107,7 +114,7 @@ class _SignupScreen4State extends State<SignupScreen4>
                                     key: _formKey,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
+                                          horizontal: 13),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
@@ -163,8 +170,8 @@ class _SignupScreen4State extends State<SignupScreen4>
                                             validator: (val) {
                                               if (val!.isEmpty) {
                                                 return "Please Enter Password";
-                                              } else if (val.length < 8) {
-                                                return "Password Is Too Short";
+                                              } else if (val.length < 6) {
+                                                return "Password is too Short";
                                               }
                                             },
                                           ),
@@ -174,10 +181,18 @@ class _SignupScreen4State extends State<SignupScreen4>
                                           DefaultButton4(
                                             text: "Sign Up",
                                             press: () {
-                                              print("click");
                                               if (_formKey.currentState!
                                                   .validate()) {
                                                 _formKey.currentState!.save();
+                                                AuthenticationService
+                                                        .createUserwithEmail(
+                                                            signemailcontroller
+                                                                .text,
+                                                            signpasscontroller
+                                                                .text)
+                                                    .then((value) {
+                                                  print(value);
+                                                });
                                               }
                                             },
                                           ),
@@ -212,7 +227,7 @@ class _SignupScreen4State extends State<SignupScreen4>
                                     key: _formKey2,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16),
+                                          horizontal: 12),
                                       child: Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceAround,
@@ -257,19 +272,26 @@ class _SignupScreen4State extends State<SignupScreen4>
                                             validator: (val) {
                                               if (val!.isEmpty) {
                                                 return "Please Enter Password";
-                                              } else if (val.length < 8) {
-                                                return "Password Is Too Short";
+                                              } else if (val.length < 6) {
+                                                return "Password is too Short";
                                               }
                                             },
                                           ),
                                           DefaultButton4(
                                             text: "Sign in",
                                             press: () {
-                                              print("click");
-
                                               if (_formKey2.currentState!
                                                   .validate()) {
                                                 _formKey2.currentState!.save();
+
+                                                AuthenticationService.signInWithEmail(
+                                                            loginemailcontroller
+                                                                .text,
+                                                            loginpasscontroller
+                                                                .text)
+                                                    .then((value) {
+                                                  print(value);
+                                                });
                                               }
                                             },
                                           ),
@@ -278,7 +300,7 @@ class _SignupScreen4State extends State<SignupScreen4>
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                "Already have an account ? ",
+                                                "Don't have an account? ",
                                                 style: TextStyle(fontSize: 13),
                                               ),
                                               InkWell(
@@ -344,7 +366,10 @@ class _SignupScreen4State extends State<SignupScreen4>
                         width: 1,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          AuthenticationService.signInWithGoogle()
+                              .then((value) => print(value));
+                        },
                         child: Container(
                           padding: EdgeInsets.all(8),
                           height: width * 0.12,
@@ -353,12 +378,15 @@ class _SignupScreen4State extends State<SignupScreen4>
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.grey.withOpacity(0.2)),
                           child: Image.asset(
-                            "assets/layout4/google1.png",
+                            "assets/icons/google1.png",
                           ),
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          AuthenticationService.signInWithApple()
+                              .then((value) => print(value));
+                        },
                         child: Container(
                           padding: EdgeInsets.all(8),
                           height: width * 0.12,
@@ -367,12 +395,15 @@ class _SignupScreen4State extends State<SignupScreen4>
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.grey.withOpacity(0.2)),
                           child: Image.asset(
-                            "assets/layout4/apple1.png",
+                            "assets/icons/apple1.png",
                           ),
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          AuthenticationService.signInWithFacebook()
+                              .then((value) => print(value));
+                        },
                         child: Container(
                           padding: EdgeInsets.all(8),
                           height: width * 0.12,
@@ -381,7 +412,7 @@ class _SignupScreen4State extends State<SignupScreen4>
                               borderRadius: BorderRadius.circular(30),
                               color: Colors.grey.withOpacity(0.2)),
                           child: Image.asset(
-                            "assets/layout4/facebook1.png",
+                            "assets/icons/facebook1.png",
                           ),
                         ),
                       ),

@@ -4,6 +4,8 @@ import 'package:flutterauthentication/ui/layout5/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout5/screens/login_screen5.dart';
 import 'package:flutterauthentication/ui/layout5/widgets/input_field.dart';
 
+import '../../../auth/auth_services.dart';
+
 class SignupScreen5 extends StatefulWidget {
   const SignupScreen5({Key? key}) : super(key: key);
 
@@ -167,9 +169,19 @@ class _SignupScreen5State extends State<SignupScreen5> {
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 _formKey.currentState!.save();
-                                print(emailcontroller.text);
-                                print(namecontroller.text);
-                                print(passcontroller.text);
+                                // print(emailcontroller.text);
+                                // print(namecontroller.text);
+                                // print(passcontroller.text);
+                                AuthenticationService.createUserwithEmail(
+                                        emailcontroller.text,
+                                        passcontroller.text)
+                                    .then((value) {
+                                  print(value);
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => SignInScreen5()));
+                                });
                               }
                             },
                             child: Text(
@@ -198,7 +210,10 @@ class _SignupScreen5State extends State<SignupScreen5> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  AuthenticationService.signInWithGoogle()
+                                      .then((value) => print(value));
+                                },
                                 child: Container(
                                   padding: EdgeInsets.all(10),
                                   height: size.width * 0.12,
@@ -213,7 +228,10 @@ class _SignupScreen5State extends State<SignupScreen5> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  AuthenticationService.signInWithFacebook()
+                                      .then((value) => print(value));
+                                },
                                 child: Container(
                                   padding: EdgeInsets.all(8),
                                   height: size.width * 0.12,
@@ -228,7 +246,10 @@ class _SignupScreen5State extends State<SignupScreen5> {
                                 ),
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  AuthenticationService.signInWithApple()
+                                      .then((value) => print(value));
+                                },
                                 child: Container(
                                   padding: EdgeInsets.all(8),
                                   height: size.width * 0.12,

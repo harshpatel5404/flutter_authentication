@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout1/screens/login_screen1.dart';
 import 'package:flutterauthentication/ui/layout1/widgets/input_filed.dart';
@@ -167,9 +168,16 @@ class _SignupScreen1State extends State<SignupScreen1> {
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             _formKey.currentState!.save();
-                            print(emailcontroller.text);
-                            print(namecontroller.text);
-                            print(passcontroller.text);
+
+                            AuthenticationService.createUserwithEmail(
+                                    emailcontroller.text, passcontroller.text)
+                                .then(
+                              (value) {
+                                print(value);
+                                                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => LoginScreen1()));
+                              },
+                            );
                           }
                         },
                         child: Text(
