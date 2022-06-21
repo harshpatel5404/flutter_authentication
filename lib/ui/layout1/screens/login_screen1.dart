@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterauthentication/auth/auth_services.dart';
 import 'package:flutterauthentication/ui/layout1/constants/colors.dart';
 import 'package:flutterauthentication/ui/layout1/widgets/input_filed.dart';
-import 'package:google_sign_in/google_sign_in.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 import 'signup_screen1.dart';
 
 class LoginScreen1 extends StatefulWidget {
@@ -22,7 +19,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
   bool isVisible = false;
   TextEditingController emailcontroller = TextEditingController();
   TextEditingController passcontroller = TextEditingController();
- 
+
   @override
   void initState() {
     super.initState();
@@ -59,7 +56,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
                       width: size.width * 0.6,
                       child: Image.asset("assets/layout1/signup.png"),
                     ),
-                    Align(
+                    const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
                         "Login",
@@ -194,7 +191,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 1,
                         ),
                         RawMaterialButton(
@@ -216,7 +213,8 @@ class _LoginScreen1State extends State<LoginScreen1> {
                         ),
                         RawMaterialButton(
                           onPressed: () {
-                            
+                            AuthenticationService.signInWithFacebook()
+                                .then((value) => print(value));
                           },
                           elevation: 2.0,
                           fillColor: Colors.white,
@@ -227,7 +225,10 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           shape: CircleBorder(),
                         ),
                         RawMaterialButton(
-                          onPressed: () {},
+                          onPressed: () {
+                              AuthenticationService.signInWithApple()
+                                .then((value) => print(value));
+                          },
                           elevation: 2.0,
                           fillColor: Colors.black,
                           child: Padding(
@@ -240,8 +241,7 @@ class _LoginScreen1State extends State<LoginScreen1> {
                           ),
                           shape: CircleBorder(),
                         ),
-
-                        SizedBox(
+                        const SizedBox(
                           width: 1,
                         )
                       ],
